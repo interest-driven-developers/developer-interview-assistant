@@ -1,0 +1,11 @@
+services:
+    oracle:
+        image: oracle/database:18.4.0-xe
+        container_name: oracle-db
+#        environment:
+#            ORACLE_ALLOW_REMOTE: true
+        restart: unless-stopped
+        ports:
+            - '11521:1521'
+        volumes:
+            - ./db/oracle:/opt/oracle/oradata
