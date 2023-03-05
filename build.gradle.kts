@@ -34,7 +34,6 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
-
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.4")
 
     runtimeOnly("com.h2database:h2:2.1.214")
@@ -48,6 +47,8 @@ dependencies {
     testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.2")
 
     runtimeOnly("com.oracle.database.jdbc:ojdbc11:21.9.0.0")
+
+    implementation("org.apache.httpcomponents:httpclient:4.5.13")
 }
 
 tasks {

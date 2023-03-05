@@ -6,7 +6,7 @@ data class UserResponse(
     val pk: Long,
     val githubId: String
 ) {
-    constructor(user:User): this(
+    constructor(user: User) : this(
         pk = user.pk, githubId = user.githubId
     )
 }

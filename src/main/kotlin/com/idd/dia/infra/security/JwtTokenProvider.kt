@@ -34,7 +34,7 @@ class JwtTokenProvider(
         return createToken(userPk = user.pk, createAt = createAt).run(::TokenResponse)
     }
 
-    private fun createToken(userPk: Long ,createAt: Date): String {
+    private fun createToken(userPk: Long, createAt: Date): String {
         val claims: Claims = Jwts.claims(mapOf(USER_PK to userPk))
         val expiration = Date(createAt.time + expirationInMilliseconds)
         return Jwts.builder()

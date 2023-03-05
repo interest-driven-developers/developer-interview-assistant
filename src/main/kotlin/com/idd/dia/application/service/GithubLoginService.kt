@@ -30,7 +30,6 @@ class GithubLoginService(
 ) {
 
     fun login(code: String): UserResponse {
-
         val restTemplate = createRestTemplate()
         val header = createHeader()
         val githubAccessTokenGetRequest = GithubAccessTokenRequest(
@@ -39,15 +38,15 @@ class GithubLoginService(
             clientSecret = githubClientSecret
         )
 
-        val githubAccessTokenResponse : ResponseEntity<GithubAccessTokenResponse> =
+        val githubAccessTokenResponse: ResponseEntity<GithubAccessTokenResponse> =
             restTemplate.postForEntity(
                 githubAccessTokenUrl,
                 HttpEntity(githubAccessTokenGetRequest, header),
                 GithubAccessTokenResponse::class.java
             )
 
-        header.set("Authorization", "Bearer "+ githubAccessTokenResponse.body!!.accessToken)
-        val githubUserDataResponse : ResponseEntity<GithubUserData> = restTemplate.exchange(
+        header.set("Authorization", "Bearer " + githubAccessTokenResponse.body!!.accessToken)
+        val githubUserDataResponse: ResponseEntity<GithubUserData> = restTemplate.exchange(
             githubUserDataUrl,
             HttpMethod.GET,
             HttpEntity<Map<String, Any>>(header),
@@ -78,6 +77,5 @@ class GithubLoginService(
         this.contentType = contentType
         this.accept = accept
     }
-
 
 }

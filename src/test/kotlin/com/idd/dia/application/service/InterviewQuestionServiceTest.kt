@@ -29,12 +29,11 @@ class InterviewQuestionServiceTest(
     context("get") {
 
         expect("get one") {
-            val test =  interviewQuestionService.get(1L, 1L)!!
+            val test = interviewQuestionService.get(1L, 1L)!!
             test.pk shouldBe 1
             test.title shouldBe "test title"
         }
     }
-
 
     context("post") {
 
@@ -44,12 +43,11 @@ class InterviewQuestionServiceTest(
 
         expect("post one") {
 
-            interviewQuestionService.post(userPk = userPk,request = request)
+            interviewQuestionService.post(userPk = userPk, request = request)
 
-            val test =  interviewQuestionService.get(2L, userPk)!!
+            val test = interviewQuestionService.get(2L, userPk)!!
             test.pk shouldBe 2
             test.title shouldBe "test title2"
         }
     }
-
 })
