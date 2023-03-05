@@ -11,13 +11,14 @@ import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
 import org.springframework.http.MediaType
-import org.springframework.http.ResponseEntity
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
 
 @Service
 class GithubLoginService(
+    private val restTemplate: RestTemplate,
+    private val userRepository: UserRepository,
+
     @Value("\${oauth.github.access_url}")
     private val githubAccessTokenUrl: String,
     @Value("\${oauth.github.user_data_url}")
@@ -25,12 +26,10 @@ class GithubLoginService(
     @Value("\${oauth.github.client_id}")
     private val githubClientId: String,
     @Value("\${oauth.github.client_secret}")
-    private val githubClientSecret: String,
-    private val userRepository: UserRepository
+    private val githubClientSecret: String
 ) {
 
     fun login(code: String): UserResponse {
-        val restTemplate = createRestTemplate()
         val header = createHeader()
         val githubAccessTokenGetRequest = GithubAccessTokenRequest(
             code = code,
@@ -38,36 +37,16 @@ class GithubLoginService(
             clientSecret = githubClientSecret
         )
 
-        val githubAccessTokenResponse: ResponseEntity<GithubAccessTokenResponse> =
-            restTemplate.postForEntity(
-                githubAccessTokenUrl,
-                HttpEntity(githubAccessTokenGetRequest, header),
-                GithubAccessTokenResponse::class.java
-            )
+        val githubAccessToken = restTemplate.getGithubUserAccessToken(githubAccessTokenGetRequest, header)
 
-        header.set("Authorization", "Bearer " + githubAccessTokenResponse.body!!.accessToken)
-        val githubUserDataResponse: ResponseEntity<GithubUserData> = restTemplate.exchange(
-            githubUserDataUrl,
-            HttpMethod.GET,
-            HttpEntity<Map<String, Any>>(header),
-            GithubUserData::class.java
-        )
-
-        val githubUserData = githubUserDataResponse.body!!
+        header.set("Authorization", "Bearer $githubAccessToken")
+        val githubUserData = restTemplate.getGithubUserData(header)
         val githubId = githubUserData.login
 
         val user = userRepository.findByGithubId(githubId)
             ?: userRepository.save(User(githubId = githubId))
 
         return UserResponse(user)
-    }
-
-    private fun createRestTemplate(connectTimeOut: Int = 5000, readTimeOut: Int = 5000): RestTemplate {
-        val httpRequestFactory = HttpComponentsClientHttpRequestFactory().apply {
-            setConnectTimeout(connectTimeOut)
-            setReadTimeout(readTimeOut)
-        }
-        return RestTemplate(httpRequestFactory)
     }
 
     private fun createHeader(
@@ -78,4 +57,20 @@ class GithubLoginService(
         this.accept = accept
     }
 
+    private fun RestTemplate.getGithubUserAccessToken(request: Any, header: HttpHeaders): String {
+        return this.postForEntity(
+            githubAccessTokenUrl,
+            HttpEntity(request, header),
+            GithubAccessTokenResponse::class.java
+        ).body?.accessToken ?: throw IllegalStateException("CANNOT GET GITHUB ACCESS TOKEN")
+    }
+
+    private fun RestTemplate.getGithubUserData(header: HttpHeaders): GithubUserData {
+        return this.exchange(
+            githubUserDataUrl,
+            HttpMethod.GET,
+            HttpEntity<Map<String, Any>>(header),
+            GithubUserData::class.java
+        ).body ?: throw IllegalStateException("CANNOT GET GITHUB USER DATA")
+    }
 }

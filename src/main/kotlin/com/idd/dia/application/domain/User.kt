@@ -8,7 +8,7 @@ interface UserRepository : JpaRepository<User, Long> {
     fun findByGithubId(githubId: String): User?
 }
 
-@Table(name = "users")
+@Table(name = "USERS")
 @Entity
 class User(
     val githubId: String,
