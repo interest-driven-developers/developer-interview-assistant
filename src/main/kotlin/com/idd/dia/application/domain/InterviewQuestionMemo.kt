@@ -1,15 +1,8 @@
 package com.idd.dia.application.domain
 
 import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.data.repository.findByIdOrNull
 import javax.persistence.Column
 import javax.persistence.Entity
-
-fun InterviewQuestionMemoRepository.deleteByPk(pk: Long, userPk: Long) {
-    findByIdOrNull(pk)?.run {
-        delete(pk)
-    }
-}
 
 interface InterviewQuestionMemoRepository : JpaRepository<InterviewQuestionMemo, Long> {
     fun findAllByUserPkAndQuestionPkAndDeletedIsFalse(userPk: Long, questionPk: Long): List<InterviewQuestionMemo>
