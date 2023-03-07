@@ -10,17 +10,21 @@ plugins {
     kotlin("plugin.jpa") version kotlinVersion
 
     id("org.jlleitschuh.gradle.ktlint") version "11.1.0"
+    id("org.asciidoctor.jvm.convert") version "3.3.2"
 }
 
 group = "com.idd"
-version = "0.0.1-SNAPSHOT"
+version = "0.2.0"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
 }
 
+val asciidoctorExtensions: Configuration by configurations.creating
+
 dependencies {
+    implementation("org.testng:testng:7.1.0")
     val jjwtVersion = "0.11.2"
     val kotestVersion = "5.5.5"
 
@@ -49,6 +53,12 @@ dependencies {
     runtimeOnly("com.oracle.database.jdbc:ojdbc11:21.9.0.0")
 
     implementation("org.apache.httpcomponents:httpclient:4.5.13")
+
+    testImplementation("io.rest-assured:rest-assured")
+
+    asciidoctorExtensions("org.springframework.restdocs:spring-restdocs-asciidoctor")
+    testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
+    testImplementation("org.springframework.restdocs:spring-restdocs-restassured")
 }
 
 tasks {
@@ -59,11 +69,34 @@ tasks {
         }
     }
 
+    val snippetsDir by extra { file("build/generated-snippets") }
+
     withType<Test>().configureEach {
+        outputs.dir(snippetsDir)
         useJUnitPlatform()
     }
 
     ktlint {
         verbose.set(true)
+    }
+
+    asciidoctor {
+        dependsOn(test)
+        configurations(asciidoctorExtensions.name)
+        baseDirFollowsSourceFile()
+        inputs.dir(snippetsDir)
+        doLast {
+            copy {
+                from(file("build/docs/asciidoc/index.html"))
+                into(file("src/main/resources/static/docs"))
+            }
+        }
+    }
+
+    bootJar {
+        dependsOn("asciidoctor")
+        from("${asciidoctor.get().outputDir}/html5") {
+            into("static/docs")
+        }
     }
 }

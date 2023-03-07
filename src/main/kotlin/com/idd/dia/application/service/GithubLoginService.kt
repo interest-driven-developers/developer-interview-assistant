@@ -20,13 +20,13 @@ class GithubLoginService(
     private val userRepository: UserRepository,
 
     @Value("\${oauth.github.access_url}")
-    private val githubAccessTokenUrl: String,
+    private val githubAccessTokenUrl: String = "",
     @Value("\${oauth.github.user_data_url}")
-    private val githubUserDataUrl: String,
+    private val githubUserDataUrl: String = "",
     @Value("\${oauth.github.client_id}")
-    private val githubClientId: String,
+    private val githubClientId: String = "",
     @Value("\${oauth.github.client_secret}")
-    private val githubClientSecret: String
+    private val githubClientSecret: String = ""
 ) {
 
     fun login(code: String): UserResponse {
