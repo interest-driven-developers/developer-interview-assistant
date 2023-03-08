@@ -2,6 +2,7 @@ package com.idd.dia.acceptance
 
 import io.restassured.RestAssured
 import io.restassured.builder.RequestSpecBuilder
+import io.restassured.response.Response
 import io.restassured.specification.RequestSpecification
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -36,5 +37,10 @@ internal class AcceptanceTest {
 
     @AfterEach
     fun afterEach() {
+    }
+
+    protected fun Response.logAndReturn(): Response {
+        this.then().log().all()
+        return this
     }
 }

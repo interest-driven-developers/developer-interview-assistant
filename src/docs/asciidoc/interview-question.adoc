@@ -1,1 +1,1 @@
-operation::interview-question[snippets='curl-request,http-request,http-response']
+operation::interview-question[snippets='http-request,response-body,response-fields']

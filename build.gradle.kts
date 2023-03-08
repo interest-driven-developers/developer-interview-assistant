@@ -95,8 +95,5 @@ tasks {
 
     bootJar {
         dependsOn("asciidoctor")
-        from("${asciidoctor.get().outputDir}/html5") {
-            into("static/docs")
-        }
     }
 }

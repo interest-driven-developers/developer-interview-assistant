@@ -440,7 +440,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>면접 질문</h1>
 <div class="details">
-<span id="revnumber">version 0.0.1-SNAPSHOT</span>
+<span id="revnumber">version 0.2.0</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -454,41 +454,65 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_면접_질문_조회"><a class="link" href="#_면접_질문_조회">면접 질문 조회</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_면접_질문_조회_curl_request"><a class="link" href="#_면접_질문_조회_curl_request">Curl request</a></h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:7106/api/v0/interview-questions/1' -i -X GET \
-    -H 'Accept: application/json'</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
 <h3 id="_면접_질문_조회_http_request"><a class="link" href="#_면접_질문_조회_http_request">HTTP request</a></h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/v0/interview-questions/1 HTTP/1.1
 Accept: application/json
-Host: localhost:7106</code></pre>
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyUGsiOjAsImlhdCI6MTY3ODI2NDI5MiwiZXhwIjoxNjc4ODY5MDkyfQ.VTvDNA7Gue4CIZ4ogFqCHzWZq--AlhfCWAbtBfPIBIw
+Host: localhost:7548</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_면접_질문_조회_http_response"><a class="link" href="#_면접_질문_조회_http_response">HTTP response</a></h3>
+<h3 id="_면접_질문_조회_response_body"><a class="link" href="#_면접_질문_조회_response_body">Response body</a></h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
-Vary: Origin
-Vary: Access-Control-Request-Method
-Vary: Access-Control-Request-Headers
-Content-Type: application/json
-Transfer-Encoding: chunked
-Date: Tue, 07 Mar 2023 12:37:54 GMT
-Keep-Alive: timeout=60
-Connection: keep-alive
-Content-Length: 53
-
-{"data":{"pk":1,"title":"test title"},"message":null}</code></pre>
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "data" : {
+    "pk" : 1,
+    "title" : "test title"
+  },
+  "message" : null
+}</code></pre>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_면접_질문_조회_response_fields"><a class="link" href="#_면접_질문_조회_response_fields">Response fields</a></h3>
+<div class="sect4">
+<h5 id="_response_data_fields"><a class="link" href="#_response_data_fields">Response Data Fields</a></h5>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">필드명</th>
+<th class="tableblock halign-left valign-top">타입</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.pk</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">문제 pk</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.title</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">문제</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">알림 메세지</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -496,7 +520,7 @@ Content-Length: 53
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 0.0.1-SNAPSHOT<br>
+Version 0.2.0<br>
 Last updated 2023-03-07 21:42:32 +0900
 </div>
 </div>

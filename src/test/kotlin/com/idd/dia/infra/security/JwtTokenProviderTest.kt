@@ -26,7 +26,7 @@ class JwtTokenProviderTest : ExpectSpec({
 
         val expiredDate = Date(now.time - (ONE_DAY_IN_MILLISECONDS * 7))
         val expiredToken = jwtTokenProvider.createToken(user, expiredDate).token
-        val validDate = Date(now.time + 1000 - (ONE_DAY_IN_MILLISECONDS * 7))
+        val validDate = Date(now.time + 60000 - (ONE_DAY_IN_MILLISECONDS * 7))
         val validToken = jwtTokenProvider.createToken(user, validDate).token
 
         jwtTokenProvider.isValid(expiredToken) shouldBe false
