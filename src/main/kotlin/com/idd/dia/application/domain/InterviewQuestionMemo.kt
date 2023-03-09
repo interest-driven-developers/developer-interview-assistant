@@ -19,27 +19,29 @@ class InterviewQuestionMemo(
     @Column(nullable = false)
     private var content: MemoContent,
 
+    @Column(nullable = false)
     private var deleted: Boolean = false,
 
     pk: Long = 0L
 ) : BaseEntity(pk = pk) {
 
-    fun verifyOwner(requestUserPk: Long) {
+    fun verify(requestUserPk: Long) {
+        check(!deleted) { "삭제된 컨텐츠입니다." }
         if (userPk != requestUserPk) throw IllegalArgumentException("권한이 없습니다.")
     }
 
     fun getContent(requestUserPk: Long): MemoContent {
-        this.verifyOwner(requestUserPk)
+        this.verify(requestUserPk)
         return content
     }
 
     fun updateContent(requestUserPk: Long, memoContent: MemoContent) {
-        this.verifyOwner(requestUserPk)
+        this.verify(requestUserPk)
         this.content = memoContent
     }
 
     fun delete(requestUserPk: Long) {
-        this.verifyOwner(requestUserPk)
+        this.verify(requestUserPk)
         this.deleted = true
     }
 }

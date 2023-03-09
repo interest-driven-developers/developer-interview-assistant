@@ -30,7 +30,7 @@ class InterviewQuestionService(
 
     @Transactional(readOnly = true)
     fun getMy(userPk: Long, pageable: Pageable): Page<InterviewQuestionResponse> {
-        return interviewQuestionRepository.findByUserPk(userPk, pageable).run {
+        return interviewQuestionRepository.findByUserPkAndDeletedIsFalse(userPk, pageable).run {
             this.map {
                 InterviewQuestionResponse(requestUserPk = userPk, it)
             }

@@ -8,7 +8,7 @@ import javax.persistence.Entity
 
 interface InterviewQuestionRepository : JpaRepository<InterviewQuestion, Long> {
     fun existsByPk(pk: Long): Boolean
-    fun findByUserPk(userPk: Long, pageable: Pageable): Page<InterviewQuestion>
+    fun findByUserPkAndDeletedIsFalse(userPk: Long, pageable: Pageable): Page<InterviewQuestion>
     fun findByUserPkIsNull(pageable: Pageable): Page<InterviewQuestion>
 }
 
@@ -20,10 +20,14 @@ class InterviewQuestion(
     @Column(nullable = false)
     private var title: String,
 
+    @Column(nullable = false)
+    private var deleted: Boolean = false,
+
     pk: Long = 0L
 ) : BaseEntity(pk = pk) {
 
-    fun verifyOwner(requestUserPk: Long?) {
+    fun verify(requestUserPk: Long?) {
+        check(!deleted) { "삭제된 컨텐츠입니다." }
         userPk?.run {
             if (requestUserPk == null) throw IllegalArgumentException("먼저 로그인해주세요.")
             if (userPk != requestUserPk) throw IllegalArgumentException("권한이 없습니다.")
@@ -31,7 +35,7 @@ class InterviewQuestion(
     }
 
     fun getTitle(requestUserPk: Long?): String {
-        verifyOwner(requestUserPk)
+        this.verify(requestUserPk)
         return title
     }
 }
