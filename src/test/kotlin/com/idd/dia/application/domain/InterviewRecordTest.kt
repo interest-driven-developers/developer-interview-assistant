@@ -17,12 +17,14 @@ class InterviewRecordTest : ExpectSpec({
         val record = InterviewRecord(
             userPk = ownerPk,
             questionPk = questionPk,
-            content = content,
+            type = RecordType.PRACTICE,
+            content = content
         )
         val deletedRecord = InterviewRecord(
             userPk = ownerPk,
             questionPk = questionPk,
             content = content,
+            type = RecordType.PRACTICE,
             deleted = true
         )
 
@@ -55,6 +57,7 @@ class InterviewRecordTest : ExpectSpec({
         val record = InterviewRecord(
             userPk = ownerPk,
             questionPk = questionPk,
+            type = RecordType.MOCK,
             content = content,
         )
 

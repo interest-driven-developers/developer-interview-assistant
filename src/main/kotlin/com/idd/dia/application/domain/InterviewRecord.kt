@@ -5,9 +5,12 @@ import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.EnumType
+import javax.persistence.Enumerated
 
 interface InterviewRecordRepository : JpaRepository<InterviewRecord, Long> {
-    fun findByUserPk(userPk: Long, pageable: Pageable): Page<InterviewQuestion>
+    fun findByUserPkAndDeletedIsFalse(userPk: Long, pageable: Pageable): Page<InterviewQuestion>
+    fun findByUserPkAndTypeAndDeletedIsFalse(userPk: Long, type: RecordType, pageable: Pageable): Page<InterviewQuestion>
 }
 
 @Entity
@@ -17,6 +20,10 @@ class InterviewRecord(
 
     @Column(nullable = false, updatable = false)
     val questionPk: Long,
+
+    @Column(nullable = false, updatable = false)
+    @Enumerated(EnumType.STRING)
+    val type: RecordType,
 
     @Column(length = 2000)
     private var content: String,
