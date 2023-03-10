@@ -42,7 +42,7 @@ class InterviewScriptService(
     ): InterviewScriptResponse? {
         return interviewScriptRepository.findByIdOrNull(scriptPk)
             ?.run {
-                this.updateScript(requestUserPk, interviewScriptRequest.content)
+                this.updateContent(requestUserPk, interviewScriptRequest.content)
                 InterviewScriptResponse(requestUserPk, this)
             }
     }

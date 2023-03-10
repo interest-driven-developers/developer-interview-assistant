@@ -6,6 +6,7 @@ import com.idd.dia.application.dto.InterviewQuestionRequest
 import io.kotest.core.spec.style.ExpectSpec
 import io.kotest.matchers.shouldBe
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
+import org.springframework.data.repository.findByIdOrNull
 
 /**
  * @see InterviewQuestionService
@@ -26,28 +27,27 @@ class InterviewQuestionServiceTest(
         interviewQuestionRepository.save(newEntity)
     }
 
-    context("get") {
+    context("공용 인터뷰 질문 조회") {
 
-        expect("get one") {
-            val test = interviewQuestionService.get(1L, 1L)!!
-            test.pk shouldBe 1
-            test.title shouldBe "test title"
+        expect("한 개 조회") {
+            val questionDto = interviewQuestionService.get(1L, 1L)!!
+            questionDto.title shouldBe "test title"
         }
     }
 
-    context("post") {
+    context("인터뷰 질문 등록") {
 
         val userPk = 1L
         val title = "test title2"
         val request = InterviewQuestionRequest(title = title)
 
-        expect("post one") {
+        expect("유저가 질문을 등록하면 해당 유저에 귀속된다.") {
+            val newQuestion = interviewQuestionService.post(userPk = userPk, request = request)
 
-            interviewQuestionService.post(userPk = userPk, request = request)
+            val newQuestionEntity = interviewQuestionRepository.findByIdOrNull(newQuestion.pk)!!
 
-            val test = interviewQuestionService.get(2L, userPk)!!
-            test.pk shouldBe 2
-            test.title shouldBe "test title2"
+            newQuestionEntity.userPk shouldBe userPk
+            newQuestionEntity.getTitle(userPk) shouldBe "test title2"
         }
     }
 })

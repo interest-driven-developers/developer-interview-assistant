@@ -32,7 +32,7 @@ class InterviewScript(
         return content
     }
 
-    fun updateScript(requestUserPk: Long, newScript: String) {
+    fun updateContent(requestUserPk: Long, newScript: String) {
         this.verifyOwner(requestUserPk)
         this.content = newScript
     }
