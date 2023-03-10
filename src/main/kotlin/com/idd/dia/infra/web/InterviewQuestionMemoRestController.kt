@@ -69,7 +69,7 @@ class InterviewQuestionMemoRestController(
     ) {
         return interviewQuestionMemoService.delete(userPk = userPk, memoPk = memoPk).run {
             ResponseEntity.ok(
-                ApiResponse.success(data = null)
+                ApiResponse.success(data = null, message = "delete success")
             )
         }
     }

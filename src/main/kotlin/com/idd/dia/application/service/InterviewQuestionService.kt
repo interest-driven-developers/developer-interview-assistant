@@ -40,8 +40,8 @@ class InterviewQuestionService(
     @Transactional
     fun post(userPk: Long, request: InterviewQuestionRequest): InterviewQuestionResponse {
         val newQuestion = request.toEntity(userPk)
-        return interviewQuestionRepository.save(
-            newQuestion
-        ).run { InterviewQuestionResponse(requestUserPk = userPk, this) }
+        return interviewQuestionRepository.save(newQuestion).run {
+            InterviewQuestionResponse(requestUserPk = userPk, this)
+        }
     }
 }

@@ -29,9 +29,7 @@ class InterviewScriptService(
     @Transactional(readOnly = true)
     fun getScript(requestUserPk: Long, questionPk: Long): InterviewScriptResponse? {
         return interviewScriptRepository.findByUserPkAndQuestionPk(requestUserPk, questionPk)
-            ?.run {
-                InterviewScriptResponse(requestUserPk, this)
-            }
+            ?.run { InterviewScriptResponse(requestUserPk, this) }
     }
 
     @Transactional
