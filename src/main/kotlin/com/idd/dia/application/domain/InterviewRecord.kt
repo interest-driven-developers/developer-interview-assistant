@@ -29,7 +29,7 @@ class InterviewRecord(
 
     fun verify(requestUserPk: Long) {
         check(!deleted) { "삭제된 컨텐츠입니다." }
-        require(userPk != requestUserPk) { "권한이 없습니다." }
+        require(userPk == requestUserPk) { "권한이 없습니다." }
     }
 
     fun getContent(requestUserPk: Long): String {
@@ -40,5 +40,10 @@ class InterviewRecord(
     fun updateScript(requestUserPk: Long, newScript: String) {
         this.verify(requestUserPk)
         this.content = newScript
+    }
+
+    fun delete(requestUserPk: Long) {
+        this.verify(requestUserPk)
+        this.deleted = true
     }
 }
