@@ -72,6 +72,9 @@ tasks {
     val snippetsDir by extra { file("build/generated-snippets") }
 
     withType<Test>().configureEach {
+        doFirst {
+            delete("build/generated-snippets")
+        }
         outputs.dir(snippetsDir)
         useJUnitPlatform()
     }
