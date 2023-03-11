@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.10">
-<title>면접 질문</title>
+<title>DIA API 문서</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,34 +438,61 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1>면접 질문</h1>
+<h1>DIA API 문서</h1>
 <div class="details">
-<span id="revnumber">version 0.2.0</span>
+<span id="revnumber">version 0.3.0</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_면접_질문_조회">면접 질문 조회</a></li>
+<li><a href="#_면접_질문">면접 질문</a>
+<ul class="sectlevel2">
+<li><a href="#_public_면접_질문_조회">public 면접 질문 조회</a>
+<ul class="sectlevel3">
+<li><a href="#_public_면접_질문_조회_http_request">HTTP request</a></li>
+<li><a href="#_public_면접_질문_조회_response_body">Response body</a></li>
+<li><a href="#_public_면접_질문_조회_response_fields">Response fields</a>
+<ul class="sectlevel4">
+<li><a href="#_response_data_fields">Response Data Fields</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_private_면접_질문_조회">private 면접 질문 조회</a>
+<ul class="sectlevel3">
+<li><a href="#_private_면접_질문_조회_http_request">HTTP request</a></li>
+<li><a href="#_private_면접_질문_조회_request_headers">Request headers</a></li>
+<li><a href="#_private_면접_질문_조회_response_body">Response body</a></li>
+<li><a href="#_private_면접_질문_조회_response_fields">Response fields</a>
+<ul class="sectlevel4">
+<li><a href="#_response_data_fields">Response Data Fields</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_면접_질문_조회"><a class="link" href="#_면접_질문_조회">면접 질문 조회</a></h2>
+<h2 id="_면접_질문"><a class="link" href="#_면접_질문">면접 질문</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_면접_질문_조회_http_request"><a class="link" href="#_면접_질문_조회_http_request">HTTP request</a></h3>
+<h3 id="_public_면접_질문_조회"><a class="link" href="#_public_면접_질문_조회">public 면접 질문 조회</a></h3>
+<div class="sect3">
+<h4 id="_public_면접_질문_조회_http_request"><a class="link" href="#_public_면접_질문_조회_http_request">HTTP request</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/v0/interview-questions/1 HTTP/1.1
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyUGsiOjAsImlhdCI6MTY3ODI2NDI5MiwiZXhwIjoxNjc4ODY5MDkyfQ.VTvDNA7Gue4CIZ4ogFqCHzWZq--AlhfCWAbtBfPIBIw
-Host: localhost:7548</code></pre>
+Host: localhost:12106</code></pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_면접_질문_조회_response_body"><a class="link" href="#_면접_질문_조회_response_body">Response body</a></h3>
+<div class="sect3">
+<h4 id="_public_면접_질문_조회_response_body"><a class="link" href="#_public_면접_질문_조회_response_body">Response body</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
@@ -478,8 +505,94 @@ Host: localhost:7548</code></pre>
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_public_면접_질문_조회_response_fields"><a class="link" href="#_public_면접_질문_조회_response_fields">Response fields</a></h4>
+<div class="sect4">
+<h5 id="_response_data_fields"><a class="link" href="#_response_data_fields">Response Data Fields</a></h5>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">필드명</th>
+<th class="tableblock halign-left valign-top">타입</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.pk</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">문제 pk</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.title</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">문제</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">알림 메세지</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 <div class="sect2">
-<h3 id="_면접_질문_조회_response_fields"><a class="link" href="#_면접_질문_조회_response_fields">Response fields</a></h3>
+<h3 id="_private_면접_질문_조회"><a class="link" href="#_private_면접_질문_조회">private 면접 질문 조회</a></h3>
+<div class="sect3">
+<h4 id="_private_면접_질문_조회_http_request"><a class="link" href="#_private_면접_질문_조회_http_request">HTTP request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/v0/interview-questions/2 HTTP/1.1
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyUGsiOjIsImlhdCI6MTY3ODUyMzA2OCwiZXhwIjoxNjc5MTI3ODY4fQ.G10WxvMiKLsc_sKFbs2ACGe62ig1UxTDivPL_G-qmQg
+Host: localhost:12106</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_private_면접_질문_조회_request_headers"><a class="link" href="#_private_면접_질문_조회_request_headers">Request headers</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Basic auth credentials</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_private_면접_질문_조회_response_body"><a class="link" href="#_private_면접_질문_조회_response_body">Response body</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "data" : {
+    "pk" : 2,
+    "title" : "test title"
+  },
+  "message" : null
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_private_면접_질문_조회_response_fields"><a class="link" href="#_private_면접_질문_조회_response_fields">Response fields</a></h4>
 <div class="sect4">
 <h5 id="_response_data_fields"><a class="link" href="#_response_data_fields">Response Data Fields</a></h5>
 <table class="tableblock frame-all grid-all stretch">
@@ -518,10 +631,11 @@ Host: localhost:7548</code></pre>
 </div>
 </div>
 </div>
+</div>
 <div id="footer">
 <div id="footer-text">
-Version 0.2.0<br>
-Last updated 2023-03-07 21:42:32 +0900
+Version 0.3.0<br>
+Last updated 2023-03-11 17:24:05 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

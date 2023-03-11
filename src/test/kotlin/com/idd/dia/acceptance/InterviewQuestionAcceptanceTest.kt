@@ -5,6 +5,7 @@ import com.idd.dia.application.domain.InterviewQuestionRepository
 import com.idd.dia.application.domain.User
 import com.idd.dia.infra.security.JwtTokenProvider
 import com.idd.dia.infra.web.InterviewQuestionRestController
+import io.kotest.matchers.shouldBe
 import io.restassured.RestAssured
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -32,21 +33,51 @@ internal class InterviewQuestionAcceptanceTest : AcceptanceTest() {
     @BeforeEach
     fun beforeTest() {
         interviewQuestionRepository.deleteAll()
-        interviewQuestionRepository.save(
-            InterviewQuestion(userPk = null, title = "test title", pk = 2L)
-        )
     }
 
     @Test
-    fun `유저에 귀속된 문제가 아니면 누구나 볼 수 있다`() {
-        val user = User("jaeykweon")
-        val jwt = jwtTokenProvider.createToken(user)
+    fun `면접 질문 조회 - 유저에 귀속된 문제가 아니면 누구나 볼 수 있다`() {
+        val title = "test title"
+        val targetData = interviewQuestionRepository.save(
+            InterviewQuestion(userPk = null, title = title)
+        )
 
         val result = RestAssured.given(spec)
             .accept("application/json")
             .filter(
                 document(
-                    "interview-question",
+                    "(get)public-interview-question",
+                    preprocessResponse(prettyPrint()),
+                    responseFields(
+                        fieldWithPath("data.pk").type(JsonFieldType.NUMBER).description("문제 pk"),
+                        fieldWithPath("data.title").type(JsonFieldType.STRING).description("문제"),
+                        fieldWithPath("message").type(JsonFieldType.NULL).description("알림 메세지"),
+                    )
+                )
+            )
+            .`when`().get("/api/v0/interview-questions/${targetData.pk}")
+            .logAndReturn()
+
+        with(result.jsonPath()) {
+            getInt("data.pk") shouldBe targetData.pk
+            getString("data.title") shouldBe title
+        }
+    }
+
+    @Test
+    fun `면접 질문 조회 - 유저에 귀속된 문제면 해당 유저만 볼 수 있다`() {
+        val user = User("jaeykweon", pk = 2L)
+        val jwt = jwtTokenProvider.createToken(user)
+        val title = "test title"
+        val targetData = interviewQuestionRepository.save(
+            InterviewQuestion(userPk = 2L, title = title)
+        )
+
+        val result = RestAssured.given(spec)
+            .accept("application/json")
+            .filter(
+                document(
+                    "(get)private-interview-question",
                     preprocessResponse(prettyPrint()),
                     requestHeaders(
                         headerWithName("Authorization").description("Basic auth credentials")
@@ -59,14 +90,12 @@ internal class InterviewQuestionAcceptanceTest : AcceptanceTest() {
                 )
             )
             .header("Authorization", "Bearer ${jwt.token}")
-            .`when`().get("/api/v0/interview-questions/1")
+            .`when`().get("/api/v0/interview-questions/${targetData.pk}")
             .logAndReturn()
 
-//        with(result.body.`as`(InterviewQuestionResponse::class.java)) {
-//            pk shouldBe 1L
-//            title shouldBe "test title"
-//        }
-
-        //.then().assertThat().statusCode(200)
+        with(result.jsonPath()) {
+            getInt("data.pk") shouldBe targetData.pk
+            getString("data.title") shouldBe title
+        }
     }
 }
