@@ -1,0 +1,1 @@
+operation::(get)interview-script[snippets='http-request,request-parameters,request-headers,response-body,response-fields']

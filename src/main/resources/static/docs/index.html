@@ -451,11 +451,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel3">
 <li><a href="#_public_면접_질문_단건_조회_http_request">HTTP request</a></li>
 <li><a href="#_public_면접_질문_단건_조회_response_body">Response body</a></li>
-<li><a href="#_public_면접_질문_단건_조회_response_fields">Response fields</a>
-<ul class="sectlevel4">
-<li><a href="#_response_data_fields">Response Data Fields</a></li>
-</ul>
-</li>
+<li><a href="#_public_면접_질문_단건_조회_response_fields">Response fields</a></li>
 </ul>
 </li>
 <li><a href="#_private_면접_질문_단건_조회">private 면접 질문 단건 조회</a>
@@ -463,11 +459,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_private_면접_질문_단건_조회_http_request">HTTP request</a></li>
 <li><a href="#_private_면접_질문_단건_조회_request_headers">Request headers</a></li>
 <li><a href="#_private_면접_질문_단건_조회_response_body">Response body</a></li>
-<li><a href="#_private_면접_질문_단건_조회_response_fields">Response fields</a>
-<ul class="sectlevel4">
-<li><a href="#_response_data_fields">Response Data Fields</a></li>
-</ul>
-</li>
+<li><a href="#_private_면접_질문_단건_조회_response_fields">Response fields</a></li>
 </ul>
 </li>
 <li><a href="#_public_면접_질문_페이지_조회">public 면접 질문 페이지 조회</a>
@@ -475,11 +467,30 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_public_면접_질문_페이지_조회_http_request">HTTP request</a></li>
 <li><a href="#_public_면접_질문_페이지_조회_request_parameters">Request parameters</a></li>
 <li><a href="#_public_면접_질문_페이지_조회_response_body">Response body</a></li>
-<li><a href="#_public_면접_질문_페이지_조회_response_fields">Response fields</a>
-<ul class="sectlevel4">
-<li><a href="#_response_data_fields">Response Data Fields</a></li>
+<li><a href="#_public_면접_질문_페이지_조회_response_fields">Response fields</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="#_면접_스크립트">면접 스크립트</a>
+<ul class="sectlevel2">
+<li><a href="#_면접_스크립트_작성">면접 스크립트 작성</a>
+<ul class="sectlevel3">
+<li><a href="#_면접_스크립트_작성_http_request">HTTP request</a></li>
+<li><a href="#_면접_스크립트_작성_request_parameters">Request parameters</a></li>
+<li><a href="#_면접_스크립트_작성_request_body">Request body</a></li>
+<li><a href="#_면접_스크립트_작성_request_fields">Request fields</a></li>
+<li><a href="#_면접_스크립트_작성_response_body">Response body</a></li>
+<li><a href="#_면접_스크립트_작성_response_fields">Response fields</a></li>
+</ul>
+</li>
+<li><a href="#_면접_스크립트_단건_조회">면접 스크립트 단건 조회</a>
+<ul class="sectlevel3">
+<li><a href="#_면접_스크립트_단건_조회_http_request">HTTP request</a></li>
+<li><a href="#_면접_스크립트_단건_조회_request_parameters">Request parameters</a></li>
+<li><a href="#_면접_스크립트_단건_조회_request_headers">Request headers</a></li>
+<li><a href="#_면접_스크립트_단건_조회_response_body">Response body</a></li>
+<li><a href="#_면접_스크립트_단건_조회_response_fields">Response fields</a></li>
 </ul>
 </li>
 </ul>
@@ -498,8 +509,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/v0/interview-questions/1 HTTP/1.1
-Accept: application/json
-Host: localhost:5509</code></pre>
+Content-Type: application/json
+Host: localhost:6790</code></pre>
 </div>
 </div>
 </div>
@@ -519,13 +530,11 @@ Host: localhost:5509</code></pre>
 </div>
 <div class="sect3">
 <h4 id="_public_면접_질문_단건_조회_response_fields"><a class="link" href="#_public_면접_질문_단건_조회_response_fields">Response fields</a></h4>
-<div class="sect4">
-<h5 id="_response_data_fields"><a class="link" href="#_response_data_fields">Response Data Fields</a></h5>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 38.4615%;">
+<col style="width: 23.0769%;">
+<col style="width: 38.4616%;">
 </colgroup>
 <thead>
 <tr>
@@ -554,7 +563,6 @@ Host: localhost:5509</code></pre>
 </table>
 </div>
 </div>
-</div>
 <div class="sect2">
 <h3 id="_private_면접_질문_단건_조회"><a class="link" href="#_private_면접_질문_단건_조회">private 면접 질문 단건 조회</a></h3>
 <div class="sect3">
@@ -562,9 +570,9 @@ Host: localhost:5509</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/v0/interview-questions/4 HTTP/1.1
-Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyUGsiOjIsImlhdCI6MTY3ODU0NDM3MywiZXhwIjoxNjc5MTQ5MTczfQ.zXCCvghN2QOOcNjOJdC5g0EfRwnp66izJQ3DzZTAlas
-Host: localhost:5509</code></pre>
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyUGsiOjIsImlhdCI6MTY3ODYwOTgxOCwiZXhwIjoxNjc5MjE0NjE4fQ.yvaQzs2LPJH2UtrW8DxHlgQhRkuX0PmVRi-EF3AGWik
+Content-Type: application/json
+Host: localhost:6790</code></pre>
 </div>
 </div>
 </div>
@@ -605,13 +613,11 @@ Host: localhost:5509</code></pre>
 </div>
 <div class="sect3">
 <h4 id="_private_면접_질문_단건_조회_response_fields"><a class="link" href="#_private_면접_질문_단건_조회_response_fields">Response fields</a></h4>
-<div class="sect4">
-<h5 id="_response_data_fields"><a class="link" href="#_response_data_fields">Response Data Fields</a></h5>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 38.4615%;">
+<col style="width: 23.0769%;">
+<col style="width: 38.4616%;">
 </colgroup>
 <thead>
 <tr>
@@ -640,7 +646,6 @@ Host: localhost:5509</code></pre>
 </table>
 </div>
 </div>
-</div>
 <div class="sect2">
 <h3 id="_public_면접_질문_페이지_조회"><a class="link" href="#_public_면접_질문_페이지_조회">public 면접 질문 페이지 조회</a></h3>
 <div class="sect3">
@@ -648,8 +653,8 @@ Host: localhost:5509</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/v0/interview-questions?page=0&amp;size=10 HTTP/1.1
-Accept: application/json
-Host: localhost:5509</code></pre>
+Content-Type: application/json
+Host: localhost:6790</code></pre>
 </div>
 </div>
 </div>
@@ -694,24 +699,24 @@ Host: localhost:5509</code></pre>
     "pageable" : {
       "sort" : {
         "empty" : true,
-        "unsorted" : true,
-        "sorted" : false
+        "sorted" : false,
+        "unsorted" : true
       },
       "offset" : 0,
-      "pageNumber" : 0,
       "pageSize" : 10,
-      "paged" : true,
-      "unpaged" : false
+      "pageNumber" : 0,
+      "unpaged" : false,
+      "paged" : true
     },
-    "last" : true,
-    "totalElements" : 2,
     "totalPages" : 1,
+    "totalElements" : 2,
+    "last" : true,
     "size" : 10,
     "number" : 0,
     "sort" : {
       "empty" : true,
-      "unsorted" : true,
-      "sorted" : false
+      "sorted" : false,
+      "unsorted" : true
     },
     "first" : true,
     "numberOfElements" : 2,
@@ -724,13 +729,11 @@ Host: localhost:5509</code></pre>
 </div>
 <div class="sect3">
 <h4 id="_public_면접_질문_페이지_조회_response_fields"><a class="link" href="#_public_면접_질문_페이지_조회_response_fields">Response fields</a></h4>
-<div class="sect4">
-<h5 id="_response_data_fields"><a class="link" href="#_response_data_fields">Response Data Fields</a></h5>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 38.4615%;">
+<col style="width: 23.0769%;">
+<col style="width: 38.4616%;">
 </colgroup>
 <thead>
 <tr>
@@ -761,12 +764,278 @@ Host: localhost:5509</code></pre>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_면접_스크립트"><a class="link" href="#_면접_스크립트">면접 스크립트</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_면접_스크립트_작성"><a class="link" href="#_면접_스크립트_작성">면접 스크립트 작성</a></h3>
+<div class="sect3">
+<h4 id="_면접_스크립트_작성_http_request"><a class="link" href="#_면접_스크립트_작성_http_request">HTTP request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /api/v0/interview-scripts?questionPk=5 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyUGsiOjIsImlhdCI6MTY3ODYwOTgxOCwiZXhwIjoxNjc5MjE0NjE4fQ.yvaQzs2LPJH2UtrW8DxHlgQhRkuX0PmVRi-EF3AGWik
+Content-Type: application/json
+Host: localhost:6790
+Content-Length: 36
+
+{
+  "content" : "script content"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_면접_스크립트_작성_request_parameters"><a class="link" href="#_면접_스크립트_작성_request_parameters">Request parameters</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>questionPk</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">문제 pk</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_면접_스크립트_작성_request_body"><a class="link" href="#_면접_스크립트_작성_request_body">Request body</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "content" : "script content"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_면접_스크립트_작성_request_fields"><a class="link" href="#_면접_스크립트_작성_request_fields">Request fields</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">스크립트 내용</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_면접_스크립트_작성_response_body"><a class="link" href="#_면접_스크립트_작성_response_body">Response body</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "data" : {
+    "pk" : 6,
+    "questionPk" : 5,
+    "content" : "script content",
+    "createAt" : "2023-03-12T17:30:19.0676583",
+    "updatedAt" : null
+  },
+  "message" : null
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_면접_스크립트_작성_response_fields"><a class="link" href="#_면접_스크립트_작성_response_fields">Response fields</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 38.4615%;">
+<col style="width: 23.0769%;">
+<col style="width: 38.4616%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">필드명</th>
+<th class="tableblock halign-left valign-top">타입</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.pk</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">스크립트 pk</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.questionPk</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">문제 pk</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.content</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">스크립트 내용</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.createAt</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">생성 시각</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.updatedAt</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">업데이트 시각</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">알림 메세지</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_면접_스크립트_단건_조회"><a class="link" href="#_면접_스크립트_단건_조회">면접 스크립트 단건 조회</a></h3>
+<div class="sect3">
+<h4 id="_면접_스크립트_단건_조회_http_request"><a class="link" href="#_면접_스크립트_단건_조회_http_request">HTTP request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/v0/interview-scripts?questionPk=7 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyUGsiOjIsImlhdCI6MTY3ODYwOTgxOSwiZXhwIjoxNjc5MjE0NjE5fQ.s7NSWhQ8TcpVdztR9UhrFZyYPhWbOB82K31vmIszbJo
+Content-Type: application/json
+Host: localhost:6790</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_면접_스크립트_단건_조회_request_parameters"><a class="link" href="#_면접_스크립트_단건_조회_request_parameters">Request parameters</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>questionPk</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">문제 pk</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_면접_스크립트_단건_조회_request_headers"><a class="link" href="#_면접_스크립트_단건_조회_request_headers">Request headers</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JWT Bearer Token</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_면접_스크립트_단건_조회_response_body"><a class="link" href="#_면접_스크립트_단건_조회_response_body">Response body</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "data" : {
+    "pk" : 8,
+    "questionPk" : 7,
+    "content" : "script content",
+    "createAt" : "2023-03-13T02:30:19.152664",
+    "updatedAt" : null
+  },
+  "message" : null
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_면접_스크립트_단건_조회_response_fields"><a class="link" href="#_면접_스크립트_단건_조회_response_fields">Response fields</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 38.4615%;">
+<col style="width: 23.0769%;">
+<col style="width: 38.4616%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">필드명</th>
+<th class="tableblock halign-left valign-top">타입</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.pk</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">스크립트 pk</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.questionPk</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">문제 pk</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.content</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">스크립트 내용</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.createAt</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">생성 시각</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.updatedAt</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">업데이트 시각</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">알림 메세지</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 0.3.0<br>
-Last updated 2023-03-11 19:35:07 +0900
+Last updated 2023-03-12 15:33:23 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
