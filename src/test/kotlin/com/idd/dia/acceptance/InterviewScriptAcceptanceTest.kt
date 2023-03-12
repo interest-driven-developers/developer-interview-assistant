@@ -52,11 +52,10 @@ internal class InterviewScriptAcceptanceTest : AcceptanceTest() {
         val scriptContent = "script content"
         val request = InterviewScriptRequest(scriptContent)
 
-        val result = RestAssured.given(spec)
+        val result = RestAssured.given(spec).log().all()
             .contentType(MediaType.APPLICATION_JSON_VALUE)
             .header(AUTHORIZATION, "Bearer $jwtToken")
             .body(jacksonObjectMapper().writeValueAsString(request))
-            .log().all()
             .filter(
                 document(
                     "(post)interview-script",
@@ -101,10 +100,9 @@ internal class InterviewScriptAcceptanceTest : AcceptanceTest() {
             InterviewScript(userPk = loginUser.pk, questionPk = questionPk, content = scriptContent)
         )
 
-        val result = RestAssured.given(spec)
+        val result = RestAssured.given(spec).log().all()
             .contentType(MediaType.APPLICATION_JSON_VALUE)
             .header(AUTHORIZATION, "Bearer $jwtToken")
-            .log().all()
             .filter(
                 document(
                     "(get)interview-script",

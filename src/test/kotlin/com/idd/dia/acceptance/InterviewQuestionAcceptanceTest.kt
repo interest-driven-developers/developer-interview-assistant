@@ -42,9 +42,8 @@ internal class InterviewQuestionAcceptanceTest : AcceptanceTest() {
             InterviewQuestion(userPk = null, title = title)
         )
 
-        val result = RestAssured.given(spec)
+        val result = RestAssured.given(spec).log().all()
             .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .log().all()
             .filter(
                 document(
                     "(get)public-interview-question",
@@ -72,10 +71,9 @@ internal class InterviewQuestionAcceptanceTest : AcceptanceTest() {
             InterviewQuestion(userPk = 2L, title = title)
         )
 
-        val result = RestAssured.given(spec)
+        val result = RestAssured.given(spec).log().all()
             .contentType(MediaType.APPLICATION_JSON_VALUE)
             .header(AUTHORIZATION, "Bearer $jwtToken")
-            .log().all()
             .filter(
                 document(
                     "(get)private-interview-question",
@@ -111,9 +109,8 @@ internal class InterviewQuestionAcceptanceTest : AcceptanceTest() {
             )
         )
 
-        val result = RestAssured.given(spec)
+        val result = RestAssured.given(spec).log().all()
             .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .log().all()
             .filter(
                 document(
                     "(get)public-interview-questions",
