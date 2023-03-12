@@ -7,7 +7,7 @@ import javax.persistence.Column
 import javax.persistence.Entity
 
 interface InterviewQuestionRepository : JpaRepository<InterviewQuestion, Long> {
-    fun existsByPk(pk: Long): Boolean
+    fun existsByPkAndDeletedIsFalse(pk: Long): Boolean
     fun findByUserPkAndDeletedIsFalse(userPk: Long, pageable: Pageable): Page<InterviewQuestion>
     fun findByUserPkIsNull(pageable: Pageable): Page<InterviewQuestion>
 }

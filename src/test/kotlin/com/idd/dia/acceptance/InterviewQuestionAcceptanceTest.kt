@@ -2,14 +2,13 @@ package com.idd.dia.acceptance
 
 import com.idd.dia.application.domain.InterviewQuestion
 import com.idd.dia.application.domain.InterviewQuestionRepository
-import com.idd.dia.application.domain.User
-import com.idd.dia.infra.security.JwtTokenProvider
 import com.idd.dia.infra.web.InterviewQuestionRestController
 import io.kotest.matchers.shouldBe
 import io.restassured.RestAssured
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.MediaType
 import org.springframework.restdocs.headers.HeaderDocumentation.headerWithName
 import org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders
 import org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse
@@ -31,9 +30,6 @@ internal class InterviewQuestionAcceptanceTest : AcceptanceTest() {
     @Autowired
     lateinit var interviewQuestionRepository: InterviewQuestionRepository
 
-    @Autowired
-    lateinit var jwtTokenProvider: JwtTokenProvider
-
     @BeforeEach
     fun beforeTest() {
         interviewQuestionRepository.deleteAll()
@@ -47,7 +43,8 @@ internal class InterviewQuestionAcceptanceTest : AcceptanceTest() {
         )
 
         val result = RestAssured.given(spec)
-            .accept("application/json")
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .log().all()
             .filter(
                 document(
                     "(get)public-interview-question",
@@ -70,15 +67,15 @@ internal class InterviewQuestionAcceptanceTest : AcceptanceTest() {
 
     @Test
     fun `면접 질문 단건 조회 - 유저에 귀속된 문제면 해당 유저만 볼 수 있다`() {
-        val user = User("jaeykweon", pk = 2L)
-        val jwt = jwtTokenProvider.createToken(user)
         val title = "test title"
         val targetData = interviewQuestionRepository.save(
             InterviewQuestion(userPk = 2L, title = title)
         )
 
         val result = RestAssured.given(spec)
-            .accept("application/json")
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .header(AUTHORIZATION, "Bearer $jwtToken")
+            .log().all()
             .filter(
                 document(
                     "(get)private-interview-question",
@@ -96,13 +93,12 @@ internal class InterviewQuestionAcceptanceTest : AcceptanceTest() {
                     )
                 )
             )
-            .header("Authorization", "Bearer ${jwt.token}")
             .`when`().get("/api/v0/interview-questions/{questionPk}", targetData.pk)
             .logAndReturn()
 
         with(result.jsonPath()) {
             getInt("data.pk") shouldBe targetData.pk
-            getString("data.title") shouldBe targetData.getTitle(user.pk)
+            getString("data.title") shouldBe targetData.getTitle(loginUser.pk)
         }
     }
 
@@ -116,7 +112,8 @@ internal class InterviewQuestionAcceptanceTest : AcceptanceTest() {
         )
 
         val result = RestAssured.given(spec)
-            .accept("application/json")
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .log().all()
             .filter(
                 document(
                     "(get)public-interview-questions",
