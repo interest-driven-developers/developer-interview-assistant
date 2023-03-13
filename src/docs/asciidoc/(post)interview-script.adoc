@@ -1,1 +1,1 @@
-operation::(post)interview-script[snippets='http-request,request-parameters,request-body,request-fields,response-body,response-fields']
+operation::(post)interview-script[snippets='http-request,path-parameters,request-body,request-fields,response-body,response-fields']

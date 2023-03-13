@@ -18,8 +18,8 @@ abstract class BaseEntity(
     val pk: Long = 0L,
 
     @Convert(converter = DbTimeConverter::class)
-    var createAt: LocalDateTime = LocalDateTime.now(),
+    val createAt: LocalDateTime = LocalDateTime.now(),
 
     @Convert(converter = DbTimeConverter::class)
-    var updateAt: LocalDateTime? = null
+    var updateAt: LocalDateTime = LocalDateTime.now()
 )

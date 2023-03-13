@@ -4,6 +4,8 @@ import com.idd.dia.application.domain.InterviewQuestionRepository
 import com.idd.dia.application.domain.InterviewScriptRepository
 import com.idd.dia.application.dto.InterviewScriptRequest
 import com.idd.dia.application.dto.InterviewScriptResponse
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -30,6 +32,13 @@ class InterviewScriptService(
     fun getScript(requestUserPk: Long, questionPk: Long): InterviewScriptResponse? {
         return interviewScriptRepository.findByUserPkAndQuestionPk(requestUserPk, questionPk)
             ?.run { InterviewScriptResponse(requestUserPk, this) }
+    }
+
+    @Transactional(readOnly = true)
+    fun getScripts(requestUserPk: Long, pageable: Pageable): Page<InterviewScriptResponse> {
+        return interviewScriptRepository.findByUserPk(userPk = requestUserPk, pageable = pageable).run {
+            this.map { InterviewScriptResponse(requestUserPk, it) }
+        }
     }
 
     @Transactional

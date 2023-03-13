@@ -1,5 +1,7 @@
 package com.idd.dia.application.domain
 
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -7,6 +9,7 @@ import javax.persistence.Entity
 interface InterviewScriptRepository : JpaRepository<InterviewScript, Long> {
 
     fun findByUserPkAndQuestionPk(userPk: Long, questionPk: Long): InterviewScript?
+    fun findByUserPk(userPk: Long, pageable: Pageable): Page<InterviewScript>
 }
 
 @Entity
