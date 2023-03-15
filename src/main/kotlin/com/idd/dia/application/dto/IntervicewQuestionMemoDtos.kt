@@ -2,6 +2,7 @@ package com.idd.dia.application.dto
 
 import com.idd.dia.application.domain.InterviewQuestionMemo
 import com.idd.dia.application.domain.MemoContent
+import java.time.LocalDateTime
 
 data class InterviewQuestionMemosResponse(
     val memos: List<InterviewQuestionMemoResponse>
@@ -17,11 +18,15 @@ data class InterviewQuestionMemosResponse(
 
 data class InterviewQuestionMemoResponse(
     val pk: Long,
-    val content: MemoContent
+    val content: MemoContent,
+    val createAt: LocalDateTime,
+    val updatedAt: LocalDateTime
 ) {
     constructor(requestUserPk: Long, memo: InterviewQuestionMemo) : this(
         pk = memo.pk,
-        content = memo.getContent(requestUserPk)
+        content = memo.getContent(requestUserPk),
+        createAt = memo.createAt,
+        updatedAt = memo.updateAt
     )
 }
 

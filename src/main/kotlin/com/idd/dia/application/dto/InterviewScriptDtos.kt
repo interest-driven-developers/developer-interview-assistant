@@ -8,7 +8,7 @@ data class InterviewScriptResponse(
     val questionPk: Long,
     val content: String,
     val createAt: LocalDateTime,
-    val updatedAt: LocalDateTime?
+    val updatedAt: LocalDateTime
 ) {
     constructor(requestUserPk: Long, script: InterviewScript) : this(
         pk = script.pk,

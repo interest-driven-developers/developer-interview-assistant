@@ -15,7 +15,9 @@ import org.springframework.restdocs.headers.HeaderDocumentation.headerWithName
 import org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders
 import org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse
 import org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint
-import org.springframework.restdocs.payload.JsonFieldType
+import org.springframework.restdocs.payload.JsonFieldType.NULL
+import org.springframework.restdocs.payload.JsonFieldType.NUMBER
+import org.springframework.restdocs.payload.JsonFieldType.STRING
 import org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath
 import org.springframework.restdocs.payload.PayloadDocumentation.relaxedResponseFields
 import org.springframework.restdocs.request.RequestDocumentation.parameterWithName
@@ -70,12 +72,12 @@ internal class InterviewScriptAcceptanceTest : AcceptanceTest() {
                         headerWithName("Authorization").description("JWT Bearer Token")
                     ),
                     relaxedResponseFields(
-                        fieldWithPath("data.content[].pk").type(JsonFieldType.NUMBER).description("스크립트 pk"),
-                        fieldWithPath("data.content[].questionPk").type(JsonFieldType.NUMBER).description("문제 pk"),
-                        fieldWithPath("data.content[].content").type(JsonFieldType.STRING).description("스크립트 내용"),
-                        fieldWithPath("data.content[].createAt").type(JsonFieldType.STRING).description("생성 시각"),
-                        fieldWithPath("data.content[].updatedAt").type(JsonFieldType.STRING).description("업데이트 시각"),
-                        fieldWithPath("message").type(JsonFieldType.NULL).description("알림 메세지"),
+                        fieldWithPath("data.content[].pk").type(NUMBER).description("스크립트 pk"),
+                        fieldWithPath("data.content[].questionPk").type(NUMBER).description("문제 pk"),
+                        fieldWithPath("data.content[].content").type(STRING).description("스크립트 내용"),
+                        fieldWithPath("data.content[].createAt").type(STRING).description("생성 시각"),
+                        fieldWithPath("data.content[].updatedAt").type(STRING).description("업데이트 시각"),
+                        fieldWithPath("message").type(NULL).description("알림 메세지"),
                     )
                 )
             )
