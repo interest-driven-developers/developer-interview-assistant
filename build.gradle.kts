@@ -14,7 +14,7 @@ plugins {
 }
 
 group = "com.idd"
-version = "0.3.0"
+version = "0.6.0"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
@@ -24,7 +24,6 @@ repositories {
 val asciidoctorExtensions: Configuration by configurations.creating
 
 dependencies {
-    implementation("org.testng:testng:7.1.0")
     val jjwtVersion = "0.11.2"
     val kotestVersion = "5.5.5"
 
