@@ -24,7 +24,7 @@ services:
             - --character-set-server=utf8mb4
             - --collation-server=utf8mb4_unicode_ci
     app:
-        build: ./
+        image: dia-test
         ports:
             - 8080:8080
         environment:

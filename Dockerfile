@@ -1,0 +1,6 @@
+FROM openjdk:17-jdk-alpine
+COPY build/libs/dia-0.6.0.jar dia.jar
+ARG SPRING_PROFILES_ACTIVE
+RUN echo $SPRING_PROFILES_ACTIVE
+ENV SPRING_PROFILES_ACTIVE=$SPRING_PROFILES_ACTIVE
+ENTRYPOINT ["java", "-jar", "dia.jar"]
