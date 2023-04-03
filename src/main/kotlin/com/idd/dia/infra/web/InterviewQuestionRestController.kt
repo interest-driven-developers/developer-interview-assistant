@@ -20,6 +20,15 @@ import org.springframework.web.bind.annotation.RestController
 class InterviewQuestionRestController(
     private val interviewQuestionService: InterviewQuestionService
 ) {
+    @PostMapping
+    fun postInterviewQuestion(
+        @LoginUser userPk: Long,
+        @RequestBody request: InterviewQuestionRequest
+    ): ResponseEntity<ApiResponse<InterviewQuestionResponse>> {
+        return ResponseEntity.ok(
+            ApiResponse.success(data = interviewQuestionService.post(userPk, request))
+        )
+    }
 
     @GetMapping("/{questionPk}")
     fun getInterviewQuestion(
@@ -47,16 +56,6 @@ class InterviewQuestionRestController(
     ): ResponseEntity<ApiResponse<Page<InterviewQuestionResponse>>> {
         return ResponseEntity.ok(
             ApiResponse.success(data = interviewQuestionService.getMy(userPk, pageable))
-        )
-    }
-
-    @PostMapping
-    fun postInterviewQuestion(
-        @LoginUser userPk: Long,
-        @RequestBody request: InterviewQuestionRequest
-    ): ResponseEntity<ApiResponse<InterviewQuestionResponse>> {
-        return ResponseEntity.ok(
-            ApiResponse.success(data = interviewQuestionService.post(userPk, request))
         )
     }
 }

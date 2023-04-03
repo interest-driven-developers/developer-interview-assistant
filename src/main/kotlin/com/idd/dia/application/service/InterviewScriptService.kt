@@ -22,6 +22,9 @@ class InterviewScriptService(
         interviewScriptRequest: InterviewScriptRequest
     ): InterviewScriptResponse {
         require(interviewQuestionRepository.existsByPkAndDeletedIsFalse(questionPk)) { "삭제되었거나 없는 문항 번호입니다." }
+        require(
+            interviewScriptRepository.existsByUserPkAndQuestionPk(userPk = requestUserPk, questionPk = questionPk)
+        ) { "이미 스크립트가 존재합니다." }
 
         val newScript = interviewScriptRequest.toEntity(requestUserPk = requestUserPk, questionPk = questionPk)
         return interviewScriptRepository.save(newScript)

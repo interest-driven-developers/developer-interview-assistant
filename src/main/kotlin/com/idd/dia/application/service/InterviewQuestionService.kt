@@ -23,25 +23,21 @@ class InterviewQuestionService(
 
     @Transactional(readOnly = true)
     fun get(pageable: Pageable): Page<InterviewQuestionResponse> {
-        return interviewQuestionRepository.findByUserPkIsNull(pageable).run {
-            this.map { InterviewQuestionResponse(requestUserPk = null, it) }
-        }
+        return interviewQuestionRepository.findByUserPkIsNull(pageable)
+            .map { InterviewQuestionResponse(requestUserPk = null, question = it) }
     }
 
     @Transactional(readOnly = true)
     fun getMy(userPk: Long, pageable: Pageable): Page<InterviewQuestionResponse> {
-        return interviewQuestionRepository.findByUserPkAndDeletedIsFalse(userPk, pageable).run {
-            this.map {
-                InterviewQuestionResponse(requestUserPk = userPk, it)
-            }
-        }
+        return interviewQuestionRepository.findByUserPkAndDeletedIsFalse(userPk, pageable)
+            .map { InterviewQuestionResponse(requestUserPk = userPk, question = it) }
     }
 
     @Transactional
     fun post(userPk: Long, request: InterviewQuestionRequest): InterviewQuestionResponse {
         val newQuestion = request.toEntity(userPk)
         return interviewQuestionRepository.save(newQuestion).run {
-            InterviewQuestionResponse(requestUserPk = userPk, this)
+            InterviewQuestionResponse(requestUserPk = userPk, question = this)
         }
     }
 }

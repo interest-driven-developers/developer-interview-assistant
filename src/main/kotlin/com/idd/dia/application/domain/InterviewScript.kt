@@ -9,6 +9,7 @@ import javax.persistence.Entity
 interface InterviewScriptRepository : JpaRepository<InterviewScript, Long> {
 
     fun findByUserPkAndQuestionPk(userPk: Long, questionPk: Long): InterviewScript?
+    fun existsByUserPkAndQuestionPk(userPk: Long, questionPk: Long): Boolean
     fun findByUserPk(userPk: Long, pageable: Pageable): Page<InterviewScript>
 }
 
