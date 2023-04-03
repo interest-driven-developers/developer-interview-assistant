@@ -57,7 +57,7 @@ class InterviewRecordTest : ExpectSpec({
         val record = InterviewRecord(
             userPk = ownerPk,
             questionPk = questionPk,
-            type = RecordType.MOCK,
+            type = RecordType.REHEARSAL,
             content = content,
         )
 

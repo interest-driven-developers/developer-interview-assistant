@@ -9,8 +9,11 @@ import javax.persistence.EnumType
 import javax.persistence.Enumerated
 
 interface InterviewRecordRepository : JpaRepository<InterviewRecord, Long> {
-    fun findByUserPkAndDeletedIsFalse(userPk: Long, pageable: Pageable): Page<InterviewQuestion>
-    fun findByUserPkAndTypeAndDeletedIsFalse(userPk: Long, type: RecordType, pageable: Pageable): Page<InterviewQuestion>
+    fun findByPkAndDeletedIsFalse(pk: Long): InterviewRecord?
+    fun findByUserPkAndDeletedIsFalse(userPk: Long, pageable: Pageable): Page<InterviewRecord>
+    fun findByUserPkAndTypeAndDeletedIsFalse(userPk: Long, type: RecordType, pageable: Pageable): Page<InterviewRecord>
+    fun findByUserPkAndQuestionPkAndDeletedIsFalse(userPk: Long, questionPk: Long, pageable: Pageable): Page<InterviewRecord>
+    fun findByUserPkAndTypeAndQuestionPkAndDeletedIsFalse(userPk: Long, type: RecordType, questionPk: Long, pageable: Pageable): Page<InterviewRecord>
 }
 
 @Entity
